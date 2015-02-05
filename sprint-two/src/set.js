@@ -18,7 +18,7 @@ setPrototype.contains = function(item){
 
 setPrototype.remove = function(item){
   var index = this._storage.indexOf(item);
-  console.log(index);
+
   if (index !== -1){
     this._storage.splice(index, 1);
   }
