@@ -3,10 +3,8 @@ var Queue = function(){
     storage : {},
     rear : 0,
     front : 0,
-    size : queueMethods.size,
-    enqueue : queueMethods.enqueue,
-    dequeue : queueMethods.dequeue
   };
+  _.extend(currentInstance, queueMethods);
 
   return currentInstance;
 };

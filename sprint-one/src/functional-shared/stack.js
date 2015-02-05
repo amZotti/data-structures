@@ -4,10 +4,8 @@ var Stack = function() {
   var currentInstance = {
     index : 0,
     storage : {},
-    push : stackMethods.push,
-    pop : stackMethods.pop,
-    size : stackMethods.size
   };
+  _.extend(currentInstance, stackMethods);
   return currentInstance;
 };
 
