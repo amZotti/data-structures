@@ -37,6 +37,13 @@ treeMethods.removeFromParent = function () {
   this.parent = null;
 };
 
+treeMethods.traverse = function (callback) {
+  callback(this.value);
+  _.each(this.children, function(child){
+    child.traverse(callback);
+  });
+};
+
 
 /*
  * Complexity: What is the time complexity of the above functions?
