@@ -17,7 +17,6 @@ var LinkedList = function(){
 
   list.removeHead = function(){
     var node = list.head;
-
     if (!(list.head === null)) {
       list.head = list.head.next;
       return node.value;
@@ -46,10 +45,8 @@ var LinkedList = function(){
 
 var Node = function(value){
   var node = {};
-
   node.value = value;
   node.next = null;
-
   return node;
 };
 

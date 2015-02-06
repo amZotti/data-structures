@@ -85,7 +85,7 @@ describe('doublyLinkedList', function() {
   it('should not contain a value that was removed from tail', function(){
     doublyLinkedList.addToHead(4);
     doublyLinkedList.addToHead(5);
-    doublyLinkedList.removeHead();
+    doublyLinkedList.removeTail();
     expect(doublyLinkedList.contains(4)).to.equal(false);
   });
 
