@@ -4,7 +4,7 @@ var DoublyLinkedList = function() {
   obj.tail = null;
 
   _.extend(obj, doublyLinkedListMethods);
-  console.dir(obj);
+
   return obj;
 };
 
