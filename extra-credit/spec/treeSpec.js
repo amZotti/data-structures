@@ -52,7 +52,7 @@ describe('tree', function() {
     expect(tree.parent).to.equal(null);
   });
 
-  it('should have children point back to itself', function() {
+  it('should have children point back to parent', function() {
     var child = tree.addChild(4);
     expect(child.parent).to.equal(tree);
   });
