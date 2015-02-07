@@ -8,7 +8,7 @@ describe('bloomfilter', function() {
   it('should return true for values that were added', function() {
     var str1 = 'where is my barbeque?';
     bloomFilter.add(str1);
-    expect(bloomFilter.contains(str1)).to.be(true);
+    expect(bloomFilter.contains(str1)).to.equal(true);
   });
 
   it('should maybe return false for values that were not added', function() {
@@ -20,7 +20,7 @@ describe('bloomfilter', function() {
     bloomFilter.add('don');
     bloomFilter.add('fun');
     bloomFilter.add('jon');
-    expect(bloomFilter.contains('ok')).to.be(false);
+    expect(bloomFilter.contains('ok')).to.equal(false);
   });
 
   it('should set the same flags for the same inputs', function() {
@@ -30,6 +30,6 @@ describe('bloomfilter', function() {
     bloomFilter.add('lol');
     bloomFilter.add(['lol']);
     var secondArray = bloomFilter.storage;
-    expect(_.isEqual(firstArray, secondArray)).to.be(true);
+    expect(_.isEqual(firstArray, secondArray)).to.equal(true);
   });
 });
