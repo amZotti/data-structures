@@ -57,23 +57,32 @@ function BTree(maxSize) {
     if (this.parent === null) {
       this.createParent(newSibling, middleElementIndex);
     } else {
-      var siblingIndex = this.findChildIndex(this) - 1;
-      this.parent.add(this.values[middleElementIndex]);
-      this.parent.children.splice(siblingIndex, 0, newSibling);
+      this.addSiblingToParent(newSibling, middleElementIndex);
     }
     newSibling.parent = this.parent;
     this.values = this.values.slice(middleElementIndex + 1);
 
-    if (this.children.length === 0) {
-      return;
+    if (this.hasNoChildren()) {
+      this.pushChildrenToSibling(newSibling, middleElementIndex);
     }
-    else {
-      for (var k = 0;k <= middleElementIndex;k++) {
-        newSibling.children.push(this.children[k]);
-        this.children[k].parent = newSibling;
-      }
-      this.children = this.children.slice(middleElementIndex + 1);
+  };
+
+  BTreeNode.prototype.addSiblingToParent = function(sibling, index) {
+    var siblingIndex = this.findChildIndex(this) - 1;
+    this.parent.add(this.values[index]);
+    this.parent.children.splice(siblingIndex, 0, sibling);
+  };
+
+  BTreeNode.prototype.hasNoChildren = function() {
+    return this.children.length !== 0;
+  };
+
+  BTreeNode.prototype.pushChildrenToSibling = function(sibling, index) {
+    for (var k = 0;k <= index;k++) {
+      sibling.children.push(this.children[k]);
+      this.children[k].parent = sibling;
     }
+    this.children = this.children.slice(index + 1);
   };
 
   BTreeNode.prototype.add = function(value) {
@@ -116,20 +125,38 @@ function BTree(maxSize) {
   }
 
   BTreeNode.prototype.contains = function(value) {
-
+    return this.traverse().indexOf(value) !== -1;
   };
 
   BTreeNode.prototype.remove = function(value) {
 
   };
+
+  BTreeNode.prototype.traverse = function() {
+    if (this.children.length === 0) {
+      return this.values;
+    } else {
+      var results = [];
+      for (var i = 0;i < this.values.length;i++) {
+        results = results.concat(this.children[i].traverse());
+        results.push(this.values[i]);
+      }
+      results = results.concat(this.children[i].traverse());
+      return results;
+    }
+  };
 }
+
+BTree.prototype.traverse = function() {
+  return this.root.traverse();
+};
 
 BTree.prototype.add = function(value) {
   this.root.add(value);
 };
 
 BTree.prototype.contains = function(value) {
-  this.root.contains(value);
+  return this.root.contains(value);
 };
 
 BTree.prototype.remove = function(value) {
